@@ -1,6 +1,7 @@
 """Hello"""
 
 
-def text(message):
-      """This returns a message"""
-      return message
+def text():
+  """This returns a message"""
+  message = 'wassup'
+  return message
