@@ -3,5 +3,5 @@
 
 def text():
     """This returns a message"""
-    message = "wassup"
+    message = "message"
     return message
