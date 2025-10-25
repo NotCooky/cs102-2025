@@ -1,6 +1,7 @@
 def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     """
     Encrypts plaintext using a Caesar cipher.
+
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
     >>> encrypt_caesar("python")
@@ -11,13 +12,26 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ''
     """
     ciphertext = ""
-    # PUT YOUR CODE HERE
+    l = list(plaintext)
+    for i in range(len(l)):
+        newletter_value = ord(l[i]) + shift
+        if 97 <= ord(l[i]) <= 122:
+            if newletter_value > ord('z'):
+                newletter_value = newletter_value - 26
+            l[i] = chr(newletter_value)
+        elif 65 <= ord(l[i]) <= 90:
+            if newletter_value > ord('Z'):
+                newletter_value = newletter_value - 26
+            l[i] = chr(newletter_value)
+        ciphertext += l[i]
+
     return ciphertext
 
 
 def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     """
     Decrypts a ciphertext using a Caesar cipher.
+
     >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
     >>> decrypt_caesar("sbwkrq")
@@ -28,5 +42,25 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     ''
     """
     plaintext = ""
-    # PUT YOUR CODE HERE
+    l = list(ciphertext)
+    for i in range(len(l)):
+        newletter_value = ord(l[i]) - shift
+        if 97 <= ord(l[i]) <= 122:
+            if newletter_value < ord('a'):
+                newletter_value = newletter_value + 26
+            l[i] = chr(newletter_value)
+        elif 65 <= ord(l[i]) <= 90:
+            if newletter_value < ord('A'):
+                newletter_value = newletter_value + 26
+            l[i] = chr(newletter_value)
+        plaintext += l[i]
+
     return plaintext
+
+
+
+
+
+
+
+
