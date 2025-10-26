@@ -20,8 +20,8 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     else:
         extended_key = keyword
 
-    caps = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    lows = list('abcdefghijklmnopqrstuvwxyz')
+    caps = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    lows = list("abcdefghijklmnopqrstuvwxyz")
 
     for i in range(len(plaintext)):
         char = plaintext[i]
@@ -36,10 +36,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
         else:
             ciphertext += char
 
-
     return ciphertext
-
-
 
     return extended_key
 
@@ -63,8 +60,8 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     else:
         extended_key = keyword
 
-    caps = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ')
-    lows = list('abcdefghijklmnopqrstuvwxyz')
+    caps = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+    lows = list("abcdefghijklmnopqrstuvwxyz")
 
     for i in range(len(ciphertext)):
         char = ciphertext[i]
@@ -80,4 +77,3 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             plaintext += char
 
     return plaintext
-
