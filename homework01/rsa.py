@@ -12,7 +12,10 @@ def is_prime(n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    # PUT YOUR CODE HERE
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
     pass
 
 
@@ -24,7 +27,12 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
+    if a == 0 or b == 0:
+        return 0
+    for i in range(2, min(a, b)):
+        if a % i == 0 and b % i == 0:
+            return i
+    return 1
     pass
 
 
@@ -35,7 +43,9 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
+    for i in range(9999):
+        if (e*i) % phi == 1:
+            return i
     pass
 
 
@@ -46,10 +56,10 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
         raise ValueError("p and q cannot be equal")
 
     # n = pq
-    # PUT YOUR CODE HERE
+    n = p * q
 
     # phi = (p-1)(q-1)
-    # PUT YOUR CODE HERE
+    phi = (p-1) * (q-1)
 
     # Choose an integer e such that e and phi(n) are coprime
     e = random.randrange(1, phi)
@@ -101,3 +111,7 @@ if __name__ == "__main__":
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
+
+
+
