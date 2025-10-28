@@ -1,6 +1,3 @@
-from operator import index
-
-
 def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     Encrypts plaintext using a Vigenere cipher.
@@ -20,25 +17,22 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     else:
         extended_key = keyword
 
-    caps = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    lows = list("abcdefghijklmnopqrstuvwxyz")
 
-    for i in range(len(plaintext)):
-        char = plaintext[i]
+
+    for i, char in enumerate(plaintext):
         key_char = extended_key[i]
-        if char in caps or char in lows:
-            if char in caps:
-                new_pos = (caps.index(char) + caps.index(key_char.upper())) % 26
-                ciphertext += caps[new_pos]
-            elif char in lows:
-                new_pos = (lows.index(char) + lows.index(key_char.lower())) % 26
-                ciphertext += lows[new_pos]
+        if char.isupper():
+            shift = ord(key_char.upper()) - ord('A')
+            new_char = chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+            ciphertext += new_char
+        elif char.islower():
+            shift = ord(key_char.lower()) - ord('a')
+            new_char = chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
+            ciphertext += new_char
         else:
             ciphertext += char
 
     return ciphertext
-
-    return extended_key
 
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
@@ -60,19 +54,17 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     else:
         extended_key = keyword
 
-    caps = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
-    lows = list("abcdefghijklmnopqrstuvwxyz")
 
-    for i in range(len(ciphertext)):
-        char = ciphertext[i]
+    for i, char in enumerate(ciphertext):
         key_char = extended_key[i]
-        if char in caps or char in lows:
-            if char in caps:
-                new_pos = (caps.index(char) - caps.index(key_char.upper())) % 26
-                plaintext += caps[new_pos]
-            elif char in lows:
-                new_pos = (lows.index(char) - lows.index(key_char.lower())) % 26
-                plaintext += lows[new_pos]
+        if char.isupper():
+            shift = ord(key_char.upper()) - ord('A')
+            new_char = chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
+            plaintext += new_char
+        elif char.islower():
+            shift = ord(key_char.lower()) - ord('a')
+            new_char = chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
+            plaintext += new_char
         else:
             plaintext += char
 
