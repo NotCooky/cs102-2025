@@ -14,11 +14,11 @@ def encrypt_caesar(plaintext: str, shift: int = 3) -> str:
     ciphertext = ""
     for i in plaintext:
         newletter_value = ord(i) + shift
-        if ord('a') <= ord(i) <= ord('z'):
+        if ord("a") <= ord(i) <= ord("z"):
             if newletter_value > ord("z"):
                 newletter_value = newletter_value - 26
             i = chr(newletter_value)
-        elif ord('A') <= ord(i) <= ord('Z'):
+        elif ord("A") <= ord(i) <= ord("Z"):
             if newletter_value > ord("Z"):
                 newletter_value = newletter_value - 26
             i = chr(newletter_value)
@@ -43,11 +43,11 @@ def decrypt_caesar(ciphertext: str, shift: int = 3) -> str:
     plaintext = ""
     for i in ciphertext:
         newletter_value = ord(i) - shift
-        if ord('a') <= ord(i) <= ord('z'):
+        if ord("a") <= ord(i) <= ord("z"):
             if newletter_value < ord("a"):
                 newletter_value = newletter_value + 26
             i = chr(newletter_value)
-        elif ord('A') <= ord(i) <= ord('Z'):
+        elif ord("A") <= ord(i) <= ord("Z"):
             if newletter_value < ord("A"):
                 newletter_value = newletter_value + 26
             i = chr(newletter_value)
