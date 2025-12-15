@@ -57,8 +57,8 @@ def bin_tree_maze(n_rows: int = 15, n_cols: int = 15, random_exit: bool = True) 
 
     if random_exit:
         entrance_row, exit_row = randint(0, n_rows - 1), randint(0, n_rows - 1)
-        entrance_col = (randint(0, n_cols - 1) if entrance_row in (0, n_rows - 1) else choice((0, n_cols - 1)))
-        exit_col = (randint(0, n_cols - 1) if exit_row in (0, n_rows - 1) else choice((0, n_cols - 1)))
+        entrance_col = randint(0, n_cols - 1) if entrance_row in (0, n_rows - 1) else choice((0, n_cols - 1))
+        exit_col = randint(0, n_cols - 1) if exit_row in (0, n_rows - 1) else choice((0, n_cols - 1))
     else:
         entrance_row, entrance_col = 0, n_cols - 2
         exit_row, exit_col = n_rows - 1, 1
@@ -156,7 +156,7 @@ def encircled_exit(maze_grid: List[List[Union[str, int]]], position: Tuple[int, 
     total_cols = len(maze_grid[0])
     pos_row, pos_col = position
 
-    if (pos_row == 0 or pos_row == total_rows - 1) and  (pos_col == 0 or pos_col == total_cols - 1):
+    if (pos_row == 0 or pos_row == total_rows - 1) and (pos_col == 0 or pos_col == total_cols - 1):
         return True
 
     if pos_row == 0 and maze_grid[pos_row + 1][pos_col] != " ":
