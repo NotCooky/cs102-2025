@@ -29,17 +29,17 @@ def bin_tree_maze(rows: int = 15, cols: int = 15, random_exit: bool = True) -> L
     :return:
     """
     grid = create_grid(rows, cols)
-    
+
     for x in range(1, rows, 2):
         for y in range(1, cols, 2):
             grid[x][y] = " "
-            
+
             directions: List[str] = []
             if x > 1:
                 directions.append("up")
             if y < cols - 2:
                 directions.append("right")
-            
+
             if directions:
                 direction = choice(directions)
                 if direction == "up":
@@ -50,7 +50,9 @@ def bin_tree_maze(rows: int = 15, cols: int = 15, random_exit: bool = True) -> L
     if random_exit:
         x_in, x_out = randint(0, rows - 1), randint(0, rows - 1)
         y_in = randint(0, cols - 1) if x_in in (0, rows - 1) else choice((0, cols - 1))
-        y_out = randint(0, cols - 1) if x_out in (0, rows - 1) else choice((0, cols - 1))
+        y_out = (
+            randint(0, cols - 1) if x_out in (0, rows - 1) else choice((0, cols - 1))
+        )
     else:
         x_in, y_in = 0, cols - 2
         x_out, y_out = rows - 1, 1
@@ -114,15 +116,15 @@ def shortest_path(grid: List[List[Union[str, int]]], exit_coord: Tuple[int, int]
     :return:
     """
     x, y = exit_coord
-    
+
     if not isinstance(grid[x][y], int):
         return None
-    
+
     k = cast(int, grid[x][y])
-    
+
     if k <= 0:
         return None
-    
+
     path: List[Tuple[int, int]] = [(x, y)]
 
     while k > 1:
@@ -208,7 +210,7 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Tuple[List[List[Union[str, 
     k = 1
     max_steps = len(maze) * len(maze[0])
     end_value = maze[end[0]][end[1]]
-    
+
     while (isinstance(end_value, int) and end_value == 0) or end_value == "X":
         make_step(maze, k)
         k += 1
@@ -227,7 +229,7 @@ def add_path_to_grid(grid: List[List[Union[str, int]]], path: Optional[Union[Tup
     :return:
     """
     if path:
-        if isinstance(path, tuple): 
+        if isinstance(path, tuple):
             i, j = path
             grid[i][j] = "X"
         else:
