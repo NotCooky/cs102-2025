@@ -9,9 +9,7 @@ def create_grid(n_rows: int = 15, n_cols: int = 15) -> List[List[Union[str, int]
     return [["■"] * n_cols for _ in range(n_rows)]
 
 
-def remove_wall(
-    maze_grid: List[List[Union[str, int]]], cell_pos: Tuple[int, int]
-) -> List[List[Union[str, int]]]:
+def remove_wall(maze_grid: List[List[Union[str, int]]], cell_pos: Tuple[int, int]) -> List[List[Union[str, int]]]:
     """
 
     :param grid:
@@ -36,9 +34,7 @@ def remove_wall(
     return maze_grid
 
 
-def bin_tree_maze(
-    n_rows: int = 15, n_cols: int = 15, random_exit: bool = True
-) -> List[List[Union[str, int]]]:
+def bin_tree_maze(n_rows: int = 15, n_cols: int = 15, random_exit: bool = True) -> List[List[Union[str, int]]]:
     """
 
     :param rows:
@@ -56,23 +52,13 @@ def bin_tree_maze(
                 maze_grid[i][j] = " "
                 free_cells.append((i, j))
 
-    # Проходим по всем свободным клеткам и убираем стены
     for current_cell in free_cells:
         remove_wall(maze_grid, current_cell)
 
-    # Размещение входа и выхода
     if random_exit:
         entrance_row, exit_row = randint(0, n_rows - 1), randint(0, n_rows - 1)
-        entrance_col = (
-            randint(0, n_cols - 1)
-            if entrance_row in (0, n_rows - 1)
-            else choice((0, n_cols - 1))
-        )
-        exit_col = (
-            randint(0, n_cols - 1)
-            if exit_row in (0, n_rows - 1)
-            else choice((0, n_cols - 1))
-        )
+        entrance_col = (randint(0, n_cols - 1) if entrance_row in (0, n_rows - 1) else choice((0, n_cols - 1)))
+        exit_col = (randint(0, n_cols - 1) if exit_row in (0, n_rows - 1) else choice((0, n_cols - 1)))
     else:
         entrance_row, entrance_col = 0, n_cols - 2
         exit_row, exit_col = n_rows - 1, 1
@@ -100,9 +86,7 @@ def get_exits(maze_grid: List[List[Union[str, int]]]) -> List[Tuple[int, int]]:
     return exit_points
 
 
-def make_step(
-    maze_grid: List[List[Union[str, int]]], step_num: int
-) -> List[List[Union[str, int]]]:
+def make_step(maze_grid: List[List[Union[str, int]]], step_num: int) -> List[List[Union[str, int]]]:
     """
 
     :param grid:
@@ -118,11 +102,7 @@ def make_step(
             if maze_grid[i][j] == step_num:
                 adjacent_cells = [(i, j + 1), (i, j - 1), (i + 1, j), (i - 1, j)]
                 for cell_i, cell_j in adjacent_cells:
-                    if (
-                        0 <= cell_i < total_rows
-                        and 0 <= cell_j < total_cols
-                        and maze_grid[cell_i][cell_j] == 0
-                    ):
+                    if 0 <= cell_i < total_rows and 0 <= cell_j < total_cols and maze_grid[cell_i][cell_j] == 0:
                         maze_grid[cell_i][cell_j] = next_step
 
     return maze_grid
@@ -157,11 +137,7 @@ def shortest_path(
         ]
 
         for cell_i, cell_j in adjacent_cells:
-            if (
-                0 <= cell_i < total_rows
-                and 0 <= cell_j < total_cols
-                and maze_grid[cell_i][cell_j] == curr_step
-            ):
+            if 0 <= cell_i < total_rows and 0 <= cell_j < total_cols and maze_grid[cell_i][cell_j] == curr_step:
                 path.append((cell_i, cell_j))
                 curr_row, curr_col = cell_i, cell_j
                 break
@@ -169,9 +145,7 @@ def shortest_path(
     return path
 
 
-def encircled_exit(
-    maze_grid: List[List[Union[str, int]]], position: Tuple[int, int]
-) -> bool:
+def encircled_exit(maze_grid: List[List[Union[str, int]]], position: Tuple[int, int]) -> bool:
     """
 
     :param grid:
@@ -182,13 +156,9 @@ def encircled_exit(
     total_cols = len(maze_grid[0])
     pos_row, pos_col = position
 
-    # Проверка углов
-    if (pos_row == 0 or pos_row == total_rows - 1) and (
-        pos_col == 0 or pos_col == total_cols - 1
-    ):
+    if (pos_row == 0 or pos_row == total_rows - 1) and  (pos_col == 0 or pos_col == total_cols - 1):
         return True
 
-    # Проверка границ
     if pos_row == 0 and maze_grid[pos_row + 1][pos_col] != " ":
         return True
     if pos_row == total_rows - 1 and maze_grid[pos_row - 1][pos_col] != " ":
@@ -203,9 +173,7 @@ def encircled_exit(
 
 def solve_maze(
     maze_grid: List[List[Union[str, int]]],
-) -> Tuple[
-    List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]
-]:
+) -> Tuple[List[List[Union[str, int]]], Optional[Union[Tuple[int, int], List[Tuple[int, int]]]]]:
     """
 
     :param grid:
@@ -221,7 +189,6 @@ def solve_maze(
         if encircled_exit(maze_copy, exit_pos):
             return maze_copy, None
 
-    # Подготовка сетки для волнового алгоритма
     for i in range(len(maze_copy)):
         for j in range(len(maze_copy[0])):
             if maze_copy[i][j] == " ":
