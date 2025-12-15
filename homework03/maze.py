@@ -47,7 +47,6 @@ def bin_tree_maze(rows: int = 15, cols: int = 15, random_exit: bool = True) -> L
                 elif direction == "right":
                     grid[x][y + 1] = " "
 
-    # генерация входа и выхода
     if random_exit:
         x_in, x_out = randint(0, rows - 1), randint(0, rows - 1)
         y_in = randint(0, cols - 1) if x_in in (0, rows - 1) else choice((0, cols - 1))
@@ -116,7 +115,6 @@ def shortest_path(grid: List[List[Union[str, int]]], exit_coord: Tuple[int, int]
     """
     x, y = exit_coord
     
-    # Проверяем, что значение в клетке - число
     if not isinstance(grid[x][y], int):
         return None
     
@@ -194,7 +192,6 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Tuple[List[List[Union[str, 
     if encircled_exit(maze, end):
         return grid, None
 
-    # Инициализируем лабиринт для алгоритма Дейкстры
     for x in range(len(maze)):
         for y in range(len(maze[0])):
             if maze[x][y] == " ":
@@ -212,7 +209,6 @@ def solve_maze(grid: List[List[Union[str, int]]]) -> Tuple[List[List[Union[str, 
     max_steps = len(maze) * len(maze[0])
     end_value = maze[end[0]][end[1]]
     
-    # Проверяем, что значение в конечной точке - число или "X"
     while (isinstance(end_value, int) and end_value == 0) or end_value == "X":
         make_step(maze, k)
         k += 1
@@ -231,10 +227,10 @@ def add_path_to_grid(grid: List[List[Union[str, int]]], path: Optional[Union[Tup
     :return:
     """
     if path:
-        if isinstance(path, tuple):  # Одна точка
+        if isinstance(path, tuple): 
             i, j = path
             grid[i][j] = "X"
-        else:  # Список точек
+        else:
             for i, j in path:
                 grid[i][j] = "X"
     return grid
