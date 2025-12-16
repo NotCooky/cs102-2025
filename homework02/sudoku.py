@@ -55,8 +55,7 @@ def get_row(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str
     ['.', '8', '9']
     """
 
-    row = pos[0]
-    return grid[row]
+    return grid[pos[0]]
 
 
 def get_col(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[str]:
@@ -226,8 +225,9 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
 
     positions = [(r, c) for r in range(9) for c in range(9)]
     random.shuffle(positions)
+    min_clues = 17 #минимальное количество подсказок для генерации корректного судоку
 
-    for i in range(17):
+    for i in range(min_clues):
         r, c = positions[i]
         # keep trying random numbers until one fits
         possible = find_possible_values(grid, (r, c))
