@@ -225,7 +225,7 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
 
     positions = [(r, c) for r in range(9) for c in range(9)]
     random.shuffle(positions)
-    min_clues = 17 #минимальное количество подсказок для генерации корректного судоку
+    min_clues = 17 # минимальное количество подсказок для генерации корректного судоку
 
     for i in range(min_clues):
         r, c = positions[i]
