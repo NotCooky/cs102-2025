@@ -11,12 +11,7 @@ Grid = tp.List[Cells]
 
 
 class GameOfLife:
-    def __init__(
-        self,
-        size: tp.Tuple[int, int],
-        randomize: bool = True,
-        max_generations: tp.Optional[float] = float("inf"),
-    ) -> None:
+    def __init__(self, size: tp.Tuple[int, int], randomize: bool = True, max_generations: tp.Optional[float] = float("inf"),) -> None:
         # Размер клеточного поля
         self.rows, self.cols = size
         # Предыдущее поколение клеток
@@ -29,8 +24,12 @@ class GameOfLife:
         self.generations = 1
 
     def create_grid(self, randomize: bool = False) -> Grid:
-        # Copy from previous assignment
-        pass
+        grid = [[0] * self.cols for i in range(self.rows)]
+        if randomize
+        for i, row in enumerate(grid):
+            for j, cols in enumerate(grid):
+                grid[i][j] = random.randint(0, 1)
+        return grid
 
     def get_neighbours(self, cell: Cell) -> Cells:
         # Copy from previous assignment
@@ -44,6 +43,7 @@ class GameOfLife:
         """
         Выполнить один шаг игры.
         """
+
         pass
 
     @property
